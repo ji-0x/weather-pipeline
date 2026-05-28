@@ -50,10 +50,25 @@ def load_config(path):
         sys.exit(f"ERROR: Invalid JSON in {path}")
 
 
+# -----------------------------
+# Fetch weater data from API
+# -----------------------------
+
+def fetch_weather(api_key, query):
+    url=f"https://api.weatherapi.com/v1/current.json?key={api_key}&q={query}"
+    try:
+        response = requests.get(url, timeout=10)
+        response.raise_for_status()
+        return response.json()
+    except requests.RequestException as e:
+        sys.exit(f"ERROR: Failed to fetch weather for {query}: {e}")
+        return None
+
+
 
 def main():
 
-    # Load confi.jsong
+    # Load config.json
     config = load_config(CONFIG_PATH)
     # Get cities
     cities = config.get('cities', {})
@@ -61,6 +76,10 @@ def main():
     print("API_KEY:", api_key)
     print("Cities:", cities)
 
+    # Get weather data
+    for city, coords in cities.items():
+        data = fetch_weather(api_key, coords)
+        print(data)
 
 
 if __name__ == '__main__':
