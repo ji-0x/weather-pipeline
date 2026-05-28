@@ -56,13 +56,15 @@ def load_config(path):
     try:
         with open(path, 'r') as f:
             config = json.load(f)
-            return config
+        return config
 
     except FileNotFoundError:
-        sys.exit(f"ERROR: Config file not found: {path}")
+        logger.error(f"Config file not found: {path}")
+        sys.exit(1)
 
     except json.JSONDecodeError:
-        sys.exit(f"ERROR: Invalid JSON in {path}")
+        logger.error(f"Config file is not Invalid JSON")
+        sys.exit(1)
 
 
 # -----------------------------
