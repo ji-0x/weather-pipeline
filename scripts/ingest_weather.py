@@ -1,4 +1,4 @@
-#!usr/bin/env python3
+#/!usr/bin/env python3
 
 
 import os 
@@ -11,8 +11,6 @@ from datetime import datetime
 
 
 
-
-
 # -----------------------------
 # Paths
 # -----------------------------
@@ -22,5 +20,15 @@ RAW_DATA_DIR = os.path.join(BASE_DIR, 'data', 'raw')
 LOG_DIR = os.path.join(BASE_DIR, 'logs')
 
 
+# -----------------------------
+# Load variables from .env
+# -----------------------------
 
+
+load_dotenv()
+api_key = os.getenv("API_KEY")
+print(api_key)
+
+if not api_key:
+    sys.exit("ERROR: API_KEY not foiund in .env")
 
