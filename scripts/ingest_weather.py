@@ -81,7 +81,7 @@ def fetch_weather(api_key, query):
         return response.json()
 
     except requests.RequestException as e:
-        sys.exit(f"ERROR: Failed to fetch weather for {query}: {e}")
+        logger.error(f"Failed to fetch weather for {query}: {e}")
         return None
 
 
