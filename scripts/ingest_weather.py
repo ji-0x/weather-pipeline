@@ -20,6 +20,21 @@ RAW_DATA_DIR = os.path.join(BASE_DIR, 'data', 'raw')
 LOG_DIR = os.path.join(BASE_DIR, 'logs')
 
 
+log_file_path = os.path.join(LOG_DIR,f'ingest_weather')
+
+
+# -----------------------------
+# Logging
+# -----------------------------
+
+logging.basicConfig(
+    filename=log_file_path,
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
+
+
 # -----------------------------
 # Load variables from .env
 # -----------------------------
