@@ -114,9 +114,6 @@ def main():
     # Get cities
     cities = config.get('cities', {})
 
-    print("API_KEY:", api_key)
-    print("Cities:", cities)
-
     # Ensure dir exists
     os.makedirs(RAW_DATA_DIR, exist_ok=True)
     
