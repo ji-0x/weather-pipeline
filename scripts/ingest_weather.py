@@ -99,11 +99,11 @@ def save_raw_data(city, data):
     try: 
         with open(filepath, 'w') as f:
             json.dump(data, f, indent=4)
-            print("Successfully saved weather data...")
+        logger.info(f"Saved weather data for {city} to {filepath}")
         return True
 
     except Exception as e:
-        print("Failed to write file...")
+        logger.error(f"Failed to write file for {city} to {e}")
         return False
 
 
