@@ -14,6 +14,7 @@ from datetime import datetime
 # -----------------------------
 # Paths
 # -----------------------------
+
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 CONFIG_PATH = os.path.join(BASE_DIR, 'config', 'settings.json')
 RAW_DATA_DIR = os.path.join(BASE_DIR, 'data', 'raw')
@@ -73,10 +74,12 @@ def load_config(path):
 
 def fetch_weather(api_key, query):
     url=f"https://api.weatherapi.com/v1/current.json?key={api_key}&q={query}"
+
     try:
         response = requests.get(url, timeout=10)
         response.raise_for_status()
         return response.json()
+
     except requests.RequestException as e:
         sys.exit(f"ERROR: Failed to fetch weather for {query}: {e}")
         return None
@@ -98,12 +101,11 @@ def save_raw_data(city, data):
             json.dump(data, f, indent=4)
             print("Successfully saved weather data...")
         return True
+
     except Exception as e:
         print("Failed to write file...")
         return False
 
-
-    
 
 def main():
 
