@@ -19,8 +19,8 @@ CONFIG_PATH = os.path.join(BASE_DIR, 'config', 'settings.json')
 RAW_DATA_DIR = os.path.join(BASE_DIR, 'data', 'raw')
 LOG_DIR = os.path.join(BASE_DIR, 'logs')
 
-
-log_file_path = os.path.join(LOG_DIR,f'ingest_weather')
+log_time = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+log_file_path = os.path.join(LOG_DIR,f'ingest_weather_{log_time}.log')
 
 
 # -----------------------------
