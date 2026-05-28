@@ -65,6 +65,28 @@ def fetch_weather(api_key, query):
         return None
 
 
+# -----------------------------
+# Save Raw weather data
+# -----------------------------
+
+def save_raw_data(city, data):
+    # timestamp in ISO 8601 format
+    timestamp = datetime.now().isoformat(timespec='seconds').replace(':', '-')
+    safe_city = city.lower().replace(' ', '_')
+    filename = f"{safe_city}_weather_{timestamp}.json"
+    filepath = os.path.join(RAW_DATA_DIR, filename)
+
+    try: 
+        with open(filepath, 'w') as f:
+            json.dump(data, f, indent=4)
+            print("Successfully saved weather data...")
+        return True
+    except Exception as e:
+        print("Failed to write file...")
+        return False
+
+
+    
 
 def main():
 
@@ -76,10 +98,14 @@ def main():
     print("API_KEY:", api_key)
     print("Cities:", cities)
 
+    # Ensure dir exists
+    os.makedirs(RAW_DATA_DIR, exist_ok=True)
+    
     # Get weather data
     for city, coords in cities.items():
         data = fetch_weather(api_key, coords)
-        print(data)
+        if data:
+            save_raw_data(city,  data)
 
 
 if __name__ == '__main__':
